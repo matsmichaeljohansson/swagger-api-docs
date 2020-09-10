@@ -1,111 +1,135 @@
-openapi: "3.0.0"
+swagger: "2.0"
 info:
-  version: 1.0.0
-  title: Swagger Petstore
-  license:
-    name: MIT
-servers:
-  - url: http://petstore.swagger.io/v1
+  description: "API-dokumentation för systemregister.sundsvall.se"
+  version: "v0"
+  title: "Systemregister API-dokumentation"
+  contact:
+    email: "TODO@sundsvall.se"
+basePath: "/api/v0/"
 paths:
-  /pets:
+  /it-service/{uuid}:
     get:
-      summary: List all pets
-      operationId: listPets
       tags:
-        - pets
+      - "IT-stöd"
+      summary: "Hämta ett IT-stöd"
+      description: "Hämtar ett IT-stöd"
+      produces:
+      - "application/json"
       parameters:
-        - name: limit
-          in: query
-          description: How many items to return at one time (max 100)
-          required: false
+      - name: "uuid"
+        in: "path"
+        description: "IT-stödets unika ID (uuid)"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Success"
           schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: A paged array of pets
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
-          content:
-            application/json:    
-              schema:
-                $ref: "#/components/schemas/Pets"
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    post:
-      summary: Create a pet
-      operationId: createPets
-      tags:
-        - pets
-      responses:
-        '201':
-          description: Null response
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /pets/{petId}:
+            $ref: "#/definitions/ITService"
+        "404":
+          description: "IT-stödet kunde inte hittas"
+  /it-service:
     get:
-      summary: Info for a specific pet
-      operationId: showPetById
       tags:
-        - pets
-      parameters:
-        - name: petId
-          in: path
-          required: true
-          description: The id of the pet to retrieve
-          schema:
-            type: string
+      - "IT-stöd"
+      summary: "Hämta samtliga IT-stöd"
+      description: "Hämtar samtliga IT-stöd"
+      produces:
+      - "application/json"
       responses:
-        '200':
-          description: Expected response to a valid request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Pet"
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-components:
-  schemas:
-    Pet:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        tag:
-          type: string
-    Pets:
-      type: array
-      items:
-        $ref: "#/components/schemas/Pet"
-    Error:
-      type: object
-      required:
-        - code
-        - message
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
+        "200":
+          description: "Success"
+          schema:
+            $ref: "#/definitions/ITServiceList"
+        "404":
+          description: "Hittade inga IT-stöd"     
+definitions:
+  ITService:
+    type: "object"
+    properties:
+      uuid:
+        type: "string"
+      name:
+        type: "string"
+      description:
+        type: "string"
+      systemCategory:
+        $ref: "#/definitions/SystemCategory"
+      objectNumber:
+        type: "integer"
+      management:
+        $ref: "#/definitions/Management"
+      systemOwner:
+        $ref: "#/definitions/SystemOwner"
+      assistantOwner:
+        $ref: "#/definitions/AssistantOwner"  
+      systemManager:
+        $ref: "#/definitions/SystemManager"
+      operations:
+        type: "string"
+      businessCritical:
+        type: "string"
+        
+  SystemCategory:
+    type: "object"
+    properties:
+      name: 
+        type: "string"
+      objectIntervalStart:
+        type: "integer"
+      objectIntervalEnd:
+        type: "integer"
+      objectGroup:
+        type: "integer"
+      objectArea:
+        type: "integer"
+      
+  
+  Management:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+        
+  SystemOwner:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      firstName:
+        type: "string"      
+      lastName:  
+        type: "string"
+      mail:
+        type: "string"
+        
+  AssistantOwner:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      firstName:
+        type: "string"      
+      lastName:  
+        type: "string"
+      mail:
+        type: "string"      
+        
+  SystemManager:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      firstName:
+        type: "string"      
+      lastName:  
+        type: "string"
+      mail:
+        type: "string"
+        
+  ITServiceList:
+    type: "array"
+    items:
+      $ref: "#/definitions/ITService"
