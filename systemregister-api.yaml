@@ -55,6 +55,8 @@ definitions:
         type: "string"
       systemCategory:
         $ref: "#/definitions/SystemCategory"
+      function:
+        type: "string"
       objectNumber:
         type: "integer"
       management:
@@ -68,6 +70,20 @@ definitions:
       operations:
         type: "string"
       businessCritical:
+        type: "string"
+      securityOfInformationClassified:
+        type: "string"
+      containsPersonalInformation:
+        type: "string"
+      documentedInPulregister:
+        type: "string"
+      managementCost:
+        type: "integer"
+      developmentCost:
+        type: "integer"
+      totalCost:
+        type: "integer"
+      objectUpdated:
         type: "string"
         
   SystemCategory:
