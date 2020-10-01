@@ -77,12 +77,40 @@ definitions:
         type: "string"
       documentedInPulregister:
         type: "string"
+      lifeCycleStatus:
+        type: "string"
+      endOfLifeDate:
+        type: "string"
+      endOfLifeComment:
+        type: "string"
+      systemInUse:
+        type: "string"
+      systemInUseComment:
+        type: "string"
+      systemHealth:
+        type: "string"
+      systemHealthComment:
+        type: "string"
+      agreementExists:
+        type: "string"
+      agreementExpiration:
+        type: "string"
+      agreementComment:
+        type: "string"
+      supportExists:
+        type: "string"
+      supportExpiration:
+        type: "string"
+      supportComment:
+        type: "string"
       managementCost:
         type: "integer"
       developmentCost:
         type: "integer"
       totalCost:
         type: "integer"
+      comment:
+        type: "string"
       objectUpdated:
         type: "string"
         
