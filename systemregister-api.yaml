@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "API-dokumentation för systemregister.sundsvall.se"
+  description: "API documentation for systemregister.sundsvall.se"
   version: "v0"
-  title: "Systemregister API-dokumentation"
+  title: "Systemregister API documentation"
   contact:
     email: "TODO@sundsvall.se"
 basePath: "/api/v0/"
@@ -10,15 +10,15 @@ paths:
   /it-service/{uuid}:
     get:
       tags:
-      - "IT-stöd"
-      summary: "Hämta ett IT-stöd"
-      description: "Hämtar ett IT-stöd"
+      - "IT-service"
+      summary: "Retrieve one IT-service"
+      description: "Retrieves one IT-service"
       produces:
       - "application/json"
       parameters:
       - name: "uuid"
         in: "path"
-        description: "IT-stödets unika ID (uuid)"
+        description: "The unique indentifier of the IT-service"
         required: true
         type: "string"
       responses:
@@ -27,13 +27,13 @@ paths:
           schema:
             $ref: "#/definitions/ITService"
         "404":
-          description: "IT-stödet kunde inte hittas"
+          description: "An IT-service with a matching uuid could not be found"
   /it-service:
     get:
       tags:
-      - "IT-stöd"
-      summary: "Hämta samtliga IT-stöd"
-      description: "Hämtar samtliga IT-stöd"
+      - "IT-service"
+      summary: "Retrieve all IT-services"
+      description: "Retrieves all IT-services"
       produces:
       - "application/json"
       responses:
@@ -42,7 +42,7 @@ paths:
           schema:
             $ref: "#/definitions/ITServiceList"
         "404":
-          description: "Hittade inga IT-stöd"     
+          description: "No IT-services found"
 definitions:
   ITService:
     type: "object"
